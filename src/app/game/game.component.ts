@@ -11,7 +11,7 @@ import { Game } from '../../models/game';
 })
 export class GameComponent {
   pickCardAnimation = false
-  currentCard?: string;
+  currentCard: string|undefined ='';
   game: Game = new Game();
 
   ngOnInit(): void { //ngOnInit: wird aufgerufen, nachdem Komp. vollständig initialisiert wurde. void: gibt keinen Wert zurück; kein return-Wert erwartet
@@ -29,10 +29,13 @@ export class GameComponent {
       this.currentCard = this.game.stack.pop();
       console.log(this.currentCard);
       this.pickCardAnimation = true;
-
+      
       setTimeout(() => {
+        if (this.currentCard) {
+          this.game.playedCards.push(this.currentCard);  // Hier wird nur ein definierter Wert gepusht
+        }
         this.pickCardAnimation = false;
-      }, 1500);
+      }, 1000);
     }
   }
 
