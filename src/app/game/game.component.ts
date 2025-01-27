@@ -39,13 +39,20 @@ export class GameComponent {
       console.log(this.currentCard);
       this.pickCardAnimation = true;
 
+
+
+
       setTimeout(() => {
         if (this.currentCard) {
           this.game.playedCards.push(this.currentCard);  // Hier wird nur ein definierter Wert gepusht
         }
         this.pickCardAnimation = false;
+        this.game.currentPlayer++;
+        this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+
       }, 1000);
     }
+
   }
 
   openDialog(): void {
